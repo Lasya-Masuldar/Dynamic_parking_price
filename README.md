@@ -81,6 +81,47 @@ Model 2: Weighted model based on demand factors
 
 ---
 
+🌳 Architecture Diagram
+
++-------------------+
+         | final_input.csv   |
+         +-------------------+
+                  |
+                  v
+      +----------------------------+
+      |  Pathway (replay_csv)      |
+      |  - Simulate streaming      |
+      +----------------------------+
+                  |
+                  v
+      +----------------------------+
+      |  Data Preprocessing        |
+      |  - Timestamp parsing       |
+      |  - Feature mapping         |
+      +----------------------------+
+                  |
+                  v
+      +----------------------------+
+      |  Tumbling Window (1 Day)   |
+      |  - Reduce & aggregate      |
+      +----------------------------+
+                  |
+                  v
+      +----------------------------+
+      |  Pricing Models            |
+      |  - Model 1 (Occupancy)     |
+      |  - Model 2 (Demand-based)  |
+      +----------------------------+
+           |               |
+           v               v
++-----------------+  +------------------+
+| Bokeh Plot      |  | output_prices.csv|
++-----------------+  +------------------+
+
+---
+
+
+
 💸 Pricing Models
 
 Model 1: Simple Linear Pricing
